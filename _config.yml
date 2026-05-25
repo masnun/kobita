@@ -9,12 +9,18 @@ lang: bn
 baseurl: ""
 url: "https://kobita.xyz"
 
-# Display order for tags on the /tags/ page. Tags not listed here
-# appear after these, sorted alphabetically.
+# Display order for tags. Tags not listed here appear after, alphabetically.
 tag_order:
   - বিরহ
   - প্রেম
   - দুষ্টুমি
+
+# English URL slug for each tag, used in #hash anchors. Add an entry per tag.
+# Tags without an entry fall back to slugify (mangles Bengali) — keep this full.
+tag_slugs:
+  বিরহ: biroho
+  প্রেম: prem
+  দুষ্টুমি: dushtumi
 
 # Poems live in the _poems collection and each render to its own page.
 collections:

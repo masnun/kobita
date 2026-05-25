@@ -26,20 +26,20 @@ layout: default
 <div class="tabs">
   <div class="tab-bar" role="tablist">
     {% for tag in all_tags %}
-      <button class="tab-btn{% if forloop.first %} active{% endif %}" role="tab" data-tab="{{ tag | slugify }}">{{ tag }}</button>
+      <button class="tab-btn{% if forloop.first %} active{% endif %}" role="tab" data-tab="{{ site.tag_slugs[tag] | default: tag | slugify }}">{{ tag }}</button>
     {% endfor %}
   </div>
 
   {% comment %} One panel per tag. {% endcomment %}
   {% for tag in all_tags %}
-    <section class="tab-panel{% if forloop.first %} active{% endif %}" id="{{ tag | slugify }}" role="tabpanel">
+    <section class="tab-panel{% if forloop.first %} active{% endif %}" id="{{ site.tag_slugs[tag] | default: tag | slugify }}" role="tabpanel">
       <ul class="poem-list">
         {% for poem in poems %}
           {% if poem.tags contains tag %}
             <li class="poem-list-item">
               <a href="{{ poem.url | relative_url }}">{{ poem.title }}</a>
               <span class="poem-list-meta">
-                {% for t in poem.tags %}<a href="{{ '/' | relative_url }}#{{ t | slugify }}" class="poem-list-tag">{{ t }}</a> / {% endfor %}{% if poem.date %}{{ poem.date | date: '%Y' }}{% endif %}
+                {% for t in poem.tags %}<a href="{{ '/' | relative_url }}#{{ site.tag_slugs[t] | default: t | slugify }}" class="poem-list-tag">{{ t }}</a> / {% endfor %}{% if poem.date %}{{ poem.date | date: '%Y' }}{% endif %}
               </span>
             </li>
           {% endif %}
