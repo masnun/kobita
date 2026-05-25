@@ -7,7 +7,9 @@ layout: default
   {% for poem in poems %}
     <li class="poem-list-item">
       <a href="{{ poem.url | relative_url }}">{{ poem.title }}</a>
-      {% if poem.date %}<span class="poem-list-date">{{ poem.date | date: '%Y' }}</span>{% endif %}
+      <span class="poem-list-meta">
+        {% for tag in poem.tags %}<a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" class="poem-list-tag">{{ tag }}</a> / {% endfor %}{% if poem.date %}{{ poem.date | date: '%Y' }}{% endif %}
+      </span>
     </li>
   {% endfor %}
 </ul>

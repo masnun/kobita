@@ -7,6 +7,13 @@ lang: bn
 baseurl: ""
 url: "https://kobita.xyz"
 
+# Display order for tags on the /tags/ page. Tags not listed here
+# appear after these, sorted alphabetically.
+tag_order:
+  - বিরহ
+  - প্রেম
+  - দুষ্টুমি
+
 # Poems live in the _poems collection and each render to its own page.
 collections:
   poems:

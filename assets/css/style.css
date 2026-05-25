@@ -77,14 +77,46 @@ body {
   text-decoration: none;
 }
 .tag:hover { background: #e6ddd0; }
-.tag-group { margin-bottom: 2.5rem; }
-.tag-heading {
+
+/* Right-side meta on home list: "tag / year", same font as the date. */
+.poem-list-meta {
+  color: var(--muted);
   font-family: var(--sans);
-  font-size: 1.1rem;
-  color: var(--accent);
-  border-bottom: 1px solid var(--rule);
-  padding-bottom: 0.3rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
 }
+.poem-list-tag {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+.poem-list-tag:hover { color: var(--accent); }
+/* Tag tabs */
+.tab-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 1.5rem;
+}
+.tab-btn {
+  font-family: var(--sans);
+  font-size: 1rem;
+  color: var(--muted);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: -1px;
+  cursor: pointer;
+}
+.tab-btn:hover { color: var(--accent); }
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
 
 /* Poem list (home) */
 .poem-list {
@@ -100,12 +132,12 @@ body {
   padding: 0.75rem 0;
   border-bottom: 1px solid var(--rule);
 }
-.poem-list-item a {
+.poem-list-item > a {
   color: var(--ink);
   text-decoration: none;
   font-size: 1.25rem;
 }
-.poem-list-item a:hover { color: var(--accent); }
+.poem-list-item > a:hover { color: var(--accent); }
 .poem-list-date {
   color: var(--muted);
   font-family: var(--sans);
