@@ -1,0 +1,33 @@
+---
+layout: default
+title: ট্যাগ
+---
+{% comment %} Collect every tag across all poems, flatten, dedupe, sort. {% endcomment %}
+{% assign raw = site.poems | map: 'tags' | join: ',' | split: ',' %}
+{% assign all_tags = "" | split: "" %}
+{% for t in raw %}
+  {% assign clean = t | strip %}
+  {% unless clean == "" %}{% assign all_tags = all_tags | push: clean %}{% endunless %}
+{% endfor %}
+{% assign all_tags = all_tags | uniq | sort %}
+
+{% if all_tags.size == 0 %}
+  <p>কোনো ট্যাগ নেই।</p>
+{% else %}
+  {% for tag in all_tags %}
+    <section class="tag-group" id="{{ tag | slugify }}">
+      <h2 class="tag-heading">{{ tag }}</h2>
+      <ul class="poem-list">
+        {% assign tagged = site.poems | sort: 'path' %}
+        {% for poem in tagged %}
+          {% if poem.tags contains tag %}
+            <li class="poem-list-item">
+              <a href="{{ poem.url | relative_url }}">{{ poem.title }}</a>
+              {% if poem.date %}<span class="poem-list-date">{{ poem.date | date: '%Y' }}</span>{% endif %}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
+{% endif %}

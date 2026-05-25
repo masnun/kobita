@@ -48,6 +48,44 @@ body {
   margin: 0.25rem 0 0;
 }
 
+/* Nav */
+.site-nav {
+  margin-top: 0.75rem;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+}
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+.site-nav a:hover { color: var(--accent); }
+
+/* Tags */
+.poem-tags {
+  margin-top: 2.5rem;
+  font-family: var(--sans);
+}
+.tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  background: #f0ebe3;
+  color: var(--accent);
+  padding: 0.15rem 0.6rem;
+  margin: 0 0.4rem 0.4rem 0;
+  border-radius: 999px;
+  text-decoration: none;
+}
+.tag:hover { background: #e6ddd0; }
+.tag-group { margin-bottom: 2.5rem; }
+.tag-heading {
+  font-family: var(--sans);
+  font-size: 1.1rem;
+  color: var(--accent);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.3rem;
+}
+
 /* Poem list (home) */
 .poem-list {
   list-style: none;

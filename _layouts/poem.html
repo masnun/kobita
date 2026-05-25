@@ -9,5 +9,11 @@ layout: default
     {{ content }}
   </div>
 
+  {% if page.tags and page.tags.size > 0 %}
+  <p class="poem-tags">
+    {% for tag in page.tags %}<a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" class="tag">{{ tag }}</a>{% endfor %}
+  </p>
+  {% endif %}
+
   <p class="back"><a href="{{ '/' | relative_url }}">← সব কবিতা</a></p>
 </article>

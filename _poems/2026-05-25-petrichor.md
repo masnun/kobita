@@ -1,6 +1,7 @@
 ---
 title: Petrichor
 date: 2026-05-25
+tags: [বিরহ]
 ---
 
 The rain spoke of you
