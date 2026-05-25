@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{{ page.description | default: site.description }}">
+  <meta name="description" content="{{ page.description | default: site.description | strip | split: '
+' | join: ' ' }}">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,11 +16,7 @@
 <body>
   <header class="site-header">
     <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
-    <p class="site-tagline">{{ site.description }}</p>
-    <nav class="site-nav">
-      <a href="{{ '/' | relative_url }}">কবিতা</a>
-      <a href="{{ '/tags/' | relative_url }}">ট্যাগ</a>
-    </nav>
+    <p class="site-tagline">{{ site.description | strip | newline_to_br }}</p>
   </header>
 
   <main class="content">

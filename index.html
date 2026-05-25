@@ -1,15 +1,72 @@
 ---
 layout: default
 ---
-<ul class="poem-list">
-  {% comment %} Sort by filename (YYYY-MM-DD- prefix) — reliable even if a poem omits the date field. {% endcomment %}
-  {% assign poems = site.poems | sort: 'path' %}
-  {% for poem in poems %}
-    <li class="poem-list-item">
-      <a href="{{ poem.url | relative_url }}">{{ poem.title }}</a>
-      <span class="poem-list-meta">
-        {% for tag in poem.tags %}<a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" class="poem-list-tag">{{ tag }}</a> / {% endfor %}{% if poem.date %}{{ poem.date | date: '%Y' }}{% endif %}
-      </span>
-    </li>
+{% comment %} Collect every tag across all poems, flatten, dedupe. {% endcomment %}
+{% assign raw = site.poems | map: 'tags' | join: ',' | split: ',' %}
+{% assign all_tags = "" | split: "" %}
+{% for t in raw %}
+  {% assign clean = t | strip %}
+  {% unless clean == "" %}{% assign all_tags = all_tags | push: clean %}{% endunless %}
+{% endfor %}
+{% assign all_tags = all_tags | uniq %}
+
+{% comment %} site.tag_order first, then remaining tags alphabetically. {% endcomment %}
+{% assign ordered = "" | split: "" %}
+{% for t in site.tag_order %}
+  {% if all_tags contains t %}{% assign ordered = ordered | push: t %}{% endif %}
+{% endfor %}
+{% assign leftover = all_tags | sort %}
+{% for t in leftover %}
+  {% unless site.tag_order contains t %}{% assign ordered = ordered | push: t %}{% endunless %}
+{% endfor %}
+{% assign all_tags = ordered %}
+
+{% assign poems = site.poems | sort: 'path' %}
+
+<div class="tabs">
+  <div class="tab-bar" role="tablist">
+    {% for tag in all_tags %}
+      <button class="tab-btn{% if forloop.first %} active{% endif %}" role="tab" data-tab="{{ tag | slugify }}">{{ tag }}</button>
+    {% endfor %}
+  </div>
+
+  {% comment %} One panel per tag. {% endcomment %}
+  {% for tag in all_tags %}
+    <section class="tab-panel{% if forloop.first %} active{% endif %}" id="{{ tag | slugify }}" role="tabpanel">
+      <ul class="poem-list">
+        {% for poem in poems %}
+          {% if poem.tags contains tag %}
+            <li class="poem-list-item">
+              <a href="{{ poem.url | relative_url }}">{{ poem.title }}</a>
+              <span class="poem-list-meta">
+                {% for t in poem.tags %}<a href="{{ '/' | relative_url }}#{{ t | slugify }}" class="poem-list-tag">{{ t }}</a> / {% endfor %}{% if poem.date %}{{ poem.date | date: '%Y' }}{% endif %}
+              </span>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
   {% endfor %}
-</ul>
+</div>
+
+<script>
+  (function () {
+    var bar = document.querySelector('.tab-bar');
+    if (!bar) return;
+    function show(id) {
+      document.querySelectorAll('.tab-panel').forEach(function (p) {
+        p.classList.toggle('active', p.id === id);
+      });
+      document.querySelectorAll('.tab-btn').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.tab === id);
+      });
+      history.replaceState(null, '', '#' + id);
+    }
+    bar.addEventListener('click', function (e) {
+      var btn = e.target.closest('.tab-btn');
+      if (btn) show(btn.dataset.tab);
+    });
+    var hash = decodeURIComponent(location.hash.slice(1));
+    if (hash && document.getElementById(hash)) show(hash);
+  })();
+</script>
