@@ -1,0 +1,13 @@
+---
+layout: default
+---
+<article class="poem">
+  <h1 class="poem-title">{{ page.title }}</h1>
+  {% if page.date %}<p class="poem-date">{{ page.date | date: '%Y' }}</p>{% endif %}
+
+  <div class="poem-body">
+    {{ content }}
+  </div>
+
+  <p class="back"><a href="{{ '/' | relative_url }}">← সব কবিতা</a></p>
+</article>

@@ -1,0 +1,35 @@
+title: কবিতা
+description: কবিতার সংকলন
+author: Masnun
+lang: bn
+
+# Apex custom domain serves at root, so baseurl is empty.
+baseurl: ""
+url: "https://kobita.xyz"
+
+# Poems live in the _poems collection and each render to its own page.
+collections:
+  poems:
+    output: true
+    permalink: /poems/:name/
+
+# Default front matter so individual poems do not need to repeat layout.
+defaults:
+  - scope:
+      path: ""
+      type: poems
+    values:
+      layout: poem
+
+markdown: kramdown
+# Single newline = line break. Lets you write verse naturally, no trailing spaces.
+kramdown:
+  hard_wrap: true
+permalink: pretty
+
+# Files Jekyll should ignore.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor

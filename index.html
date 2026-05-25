@@ -1,0 +1,13 @@
+---
+layout: default
+---
+<ul class="poem-list">
+  {% comment %} Sort by filename (YYYY-MM-DD- prefix) — reliable even if a poem omits the date field. {% endcomment %}
+  {% assign poems = site.poems | sort: 'path' %}
+  {% for poem in poems %}
+    <li class="poem-list-item">
+      <a href="{{ poem.url | relative_url }}">{{ poem.title }}</a>
+      {% if poem.date %}<span class="poem-list-date">{{ poem.date | date: '%Y' }}</span>{% endif %}
+    </li>
+  {% endfor %}
+</ul>

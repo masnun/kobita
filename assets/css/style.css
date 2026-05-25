@@ -1,0 +1,114 @@
+:root {
+  --ink: #1c1917;
+  --muted: #78716c;
+  --bg: #faf8f5;
+  --rule: #e7e2da;
+  --accent: #8a5a3b;
+  --serif: "Noto Serif Bengali", Georgia, serif;
+  --sans: "Hind Siliguri", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: 18px; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-header,
+.content,
+.site-footer {
+  max-width: 38rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Header */
+.site-header {
+  text-align: center;
+  padding-top: 3.5rem;
+  padding-bottom: 2rem;
+}
+.site-title {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 2rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.site-tagline {
+  color: var(--muted);
+  font-family: var(--sans);
+  margin: 0.25rem 0 0;
+}
+
+/* Poem list (home) */
+.poem-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.poem-list-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.poem-list-item a {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 1.25rem;
+}
+.poem-list-item a:hover { color: var(--accent); }
+.poem-list-date {
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+/* Single poem */
+.poem-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.25rem;
+}
+.poem-date {
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  margin: 0 0 2rem;
+}
+.poem-body {
+  font-size: 1.2rem;
+  line-height: 2.1;
+}
+.poem-body p { margin: 0 0 1.6rem; }
+
+/* Links */
+a { color: var(--accent); }
+
+.back {
+  margin-top: 3rem;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+}
+.back a { text-decoration: none; }
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
