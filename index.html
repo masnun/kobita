@@ -21,7 +21,7 @@ layout: default
 {% endfor %}
 {% assign all_tags = ordered %}
 
-{% assign poems = site.poems | sort: 'path' %}
+{% assign poems = site.poems | sort: 'path' | reverse %}
 
 <div class="tabs">
   <div class="tab-bar" role="tablist">
